@@ -21,6 +21,11 @@ class funcion{
         return $reflect->getDefaultProperties();
     }
 
+    /**
+     * @param $object
+     * @param $nombre
+     * @return mixed
+     */
     public function getValor($object,$nombre){
 
         $reflect = new ReflectionClass($object);
@@ -32,8 +37,15 @@ class funcion{
             }
 
         }
+        return null;
     }
 
+    /**
+     * @param $object
+     * @param $nombre
+     * @param $value
+     * @return mixed
+     */
     public function setValor($object,$nombre,$value){
 
         $reflect = new ReflectionClass($object);
@@ -45,6 +57,7 @@ class funcion{
             }
 
         }
+        return null;
     }
 
     public function getArray($object){
@@ -70,6 +83,10 @@ class funcion{
         return $reflect->getProperty($nombre)->getDocComment() == "/** Id */";
     }
 
+    /**
+     * @param $object
+     * @return string
+     */
     public function createInsert($object){
         $reflect = new ReflectionClass($object);
         $query = "INSERT INTO ".$reflect->getName()." ";
@@ -120,20 +137,22 @@ class funcion{
         return $query.$valor.$filas;
     }
 
+    /**
+     * @param $object
+     * @return string
+     */
     public function createDelete($object){
         $reflect = new ReflectionClass($object);
         $query = "DELETE FROM ".$reflect->getName()." ";
-        $filas = " WHERE ";
+        $f = " WHERE ";
         $Fields = $this->getProperty($object);
         foreach ($Fields as $Field => $value) {
             $obj = $this->getValor($object,$Field);
 
             if($this->isPrimary($object,$Field)){
-                $filas .=$Field."=".$obj." ";
+                $f .=$Field."=".$obj." ";
             }
         }
-
-
-        return $query.$filas;
+        return $query.$f;
     }
 }
