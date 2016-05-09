@@ -6,7 +6,7 @@
  * Time: 06:55 PM
  */
 include("conexion/conect.php");
-include ("entidades/Usuario.php");
+include ("entidades/Administracion/Usuario.php");
 include ("funciones/funcion.php");
 
 $us = new Usuario();
