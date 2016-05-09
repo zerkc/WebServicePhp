@@ -7,17 +7,15 @@
  */
 
 /**
- * Description of Persona
+ * Description of Animal
  *
  * @author GustavoG
  */
-class Persona {
+class Animal {
 
     private $id;
     private $nombre;
-    private $apellido;
-    private $cedula;
-    private $correo;
+    private $Especie_id;
 
     public function getId() {
         return $this->id;
@@ -27,16 +25,8 @@ class Persona {
         return $this->nombre;
     }
 
-    public function getApellido() {
-        return $this->apellido;
-    }
-
-    public function getCedula() {
-        return $this->cedula;
-    }
-
-    public function getCorreo() {
-        return $this->correo;
+    public function getEspecie_id() {
+        return $this->Especie_id;
     }
 
     public function setId($id) {
@@ -47,16 +37,8 @@ class Persona {
         $this->nombre = $nombre;
     }
 
-    public function setApellido($apellido) {
-        $this->apellido = $apellido;
-    }
-
-    public function setCedula($cedula) {
-        $this->cedula = $cedula;
-    }
-
-    public function setCorreo($correo) {
-        $this->correo = $correo;
+    public function setEspecie_id($Especie_id) {
+        $this->Especie_id = $Especie_id;
     }
 
 }

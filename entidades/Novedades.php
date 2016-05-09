@@ -12,14 +12,14 @@
  * @author GustavoG
  */
 class Novedades {
-    
+
     private $id;
     private $fechaElaboracion;
     private $nombre;
     private $descripcion;
     private $Cliente_id;
     private $Usuario_id;
-    
+
     public function getId() {
         return $this->id;
     }
@@ -67,6 +67,5 @@ class Novedades {
     public function setUsuario_id($Usuario_id) {
         $this->Usuario_id = $Usuario_id;
     }
-
 
 }
