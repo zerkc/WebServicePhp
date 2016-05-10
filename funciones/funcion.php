@@ -80,7 +80,7 @@ class funcion{
 
     public function isPrimary($object,$nombre){
         $reflect = new ReflectionClass($object);
-        return $reflect->getProperty($nombre)->getDocComment() == "/** Id */";
+        return (strpos($reflect->getProperty($nombre)->getDocComment(), '@Id') !== false);
     }
 
     /**

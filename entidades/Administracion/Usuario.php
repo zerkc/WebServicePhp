@@ -8,7 +8,7 @@
  */
 class Usuario{
 
-    /** Id */
+    /** @Id */
     private $id;
     private $usuario;
     private $contrasena;
