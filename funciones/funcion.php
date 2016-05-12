@@ -88,7 +88,7 @@ class funcion{
         if(gettype($obj) == "integer" || gettype($obj) == "double"){
             return $obj.",";
         }else if(gettype($obj) == "string"){
-            $obj = str_replace("''","&#039;",$obj);
+            $obj = str_replace("'","&#039;",$obj);
             return "'".$obj."',";
         }else if(gettype($obj) == "object"){
             return "'".$obj."',";
