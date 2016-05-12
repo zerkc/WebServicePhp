@@ -130,7 +130,7 @@ class funcion{
             $valor.=$this->sqlData($obj);
 
             if($this->isPrimary($object,$Field)){
-                $filas .=$Field."=".$obj." ";
+                $filas .=$Field."=".$this->sqlData($obj)." ";
             }
         }
 
