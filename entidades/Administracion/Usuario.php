@@ -2,13 +2,13 @@
 
 /**
  * Created by PhpStorm.
- * User: clases
+ * User: GustavoG
  * Date: 21/04/2016
  * Time: 06:58 PM
  */
 class Usuario{
 
-    /** Id */
+    /** @Id */
     private $id;
     private $usuario;
     private $contrasena;

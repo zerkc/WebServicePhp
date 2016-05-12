@@ -2,7 +2,7 @@
 
 /**
  * Created by PhpStorm.
- * User: clases
+ * User: GustavoG
  * Date: 21/04/2016
  * Time: 07:03 PM
  */
@@ -80,7 +80,7 @@ class funcion{
 
     public function isPrimary($object,$nombre){
         $reflect = new ReflectionClass($object);
-        return $reflect->getProperty($nombre)->getDocComment() == "/** Id */";
+        return (strpos($reflect->getProperty($nombre)->getDocComment(), '@Id') !== false);
     }
 
     /**
