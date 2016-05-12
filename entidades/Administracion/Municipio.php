@@ -13,6 +13,9 @@
  */
 class Municipio {
 
+    /**
+     * @Id
+     */
     private $id;
     private $nombre;
 

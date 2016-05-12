@@ -13,8 +13,20 @@
  */
 class Vacunacion_has_Animal {
 
+    /**
+     * @Id
+     * @ManyToOne
+     */
     private $Usuario_id;
+    /**
+     * @Id
+     * @ManyToOne
+     */
     private $Vacunacion_id;
+    /**
+     * @Id
+     * @ManyToOne
+     */
     private $Animal_id;
     private $cantidad;
 

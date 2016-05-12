@@ -13,7 +13,15 @@
  */
 class Semana_has_Parroquia {
 
+    /**
+     * @Id
+     * @ManyToOne
+     */
     private $Semana_id;
+    /**
+     * @Id
+     * @ManyToOne
+     */
     private $Parroquia_id;
 
     public function getSemana_id() {

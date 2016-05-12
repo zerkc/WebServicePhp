@@ -13,8 +13,11 @@
  */
 class Semana {
 
+    /**
+     * @Id
+     */
     private $id;
-    private $Semana;
+    private $semana;
     private $year;
 
     public function getId() {

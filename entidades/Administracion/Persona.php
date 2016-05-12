@@ -13,6 +13,9 @@
  */
 class Persona {
 
+    /**
+     * @Id
+     */
     private $id;
     private $nombre;
     private $apellido;

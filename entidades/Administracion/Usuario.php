@@ -8,12 +8,22 @@
  */
 class Usuario{
 
-    /** @Id */
+    /**
+     * @Id
+     * @ManyToOne(name="Gustavo",length=5)
+     * @OneToMany(name="no se pepe")
+     */
     private $id;
     private $usuario;
     private $contrasena;
     private $fechaNacimiento;
+    /**
+     * @ManyToOne
+     */
     private $Permiso_id;
+    /**
+     * @ManyToOne
+     */
     private $Persona_id;
 
     /**

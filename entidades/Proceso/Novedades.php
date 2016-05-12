@@ -13,11 +13,20 @@
  */
 class Novedades {
 
+    /**
+     * @Id
+     */
     private $id;
     private $fechaElaboracion;
     private $nombre;
     private $descripcion;
+    /**
+     * @ManyToOne
+     */
     private $Cliente_id;
+    /**
+     * @ManyToOne
+     */
     private $Usuario_id;
 
     public function getId() {

@@ -13,10 +13,19 @@
  */
 class Cliente {
 
+    /**
+     * @Id
+     */
     private $id;
     private $telefono;
     private $direccion;
+    /**
+     * @ManyToOne
+     */
     private $Parroquia_id;
+    /**
+     * @ManyToOne
+     */
     private $Persona_id;
 
     public function getId() {

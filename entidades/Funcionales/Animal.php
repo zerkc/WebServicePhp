@@ -13,8 +13,14 @@
  */
 class Animal {
 
+    /**
+     * @Id
+     */
     private $id;
     private $nombre;
+    /**
+     * @ManyToOne
+     */
     private $Especie_id;
 
     public function getId() {

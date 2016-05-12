@@ -13,8 +13,14 @@
  */
 class Vacunacion {
 
+    /**
+     * @Id
+     */
     private $id;
     private $fechaElaboracion;
+    /**
+     * @ManyToOne
+     */
     private $Semana_id;
 
     public function getId() {

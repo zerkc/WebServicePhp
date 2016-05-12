@@ -13,8 +13,14 @@
  */
 class Caso {
 
+    /**
+     * @Id
+     */
     private $id;
     private $fechaElaboracion;
+    /**
+     * @ManyToOne
+     */
     private $Parroquia_id;
 
     public function getId() {

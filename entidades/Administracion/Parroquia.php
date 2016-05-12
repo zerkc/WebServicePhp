@@ -13,8 +13,14 @@
  */
 class Parroquia {
 
+    /**
+     * @Id
+     */
     private $id;
     private $nombre;
+    /**
+     * @ManyToOne
+     */
     private $Municipio_id;
 
     public function getId() {

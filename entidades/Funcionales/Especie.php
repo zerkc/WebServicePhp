@@ -13,6 +13,9 @@
  */
 class Especie {
 
+    /**
+     * @Id
+     */
     private $id;
     private $nombre;
 

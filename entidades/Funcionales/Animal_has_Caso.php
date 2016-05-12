@@ -13,7 +13,15 @@
  */
 class Animal_has_Caso {
 
+    /**
+     * @Id
+     * @ManyToOne
+     */
     private $Animal_id;
+    /**
+     * @Id
+     * @ManyToOne
+     */
     private $Caso_id;
     private $cantidadIngresado;
     private $cantidadPositivos;
