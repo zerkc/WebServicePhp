@@ -12,10 +12,10 @@ class funcion{
     public function getProperty($objeto){
         $reflect = new ReflectionClass($objeto);
 
-        $r = $reflect->getProperties();
+        /*$r = $reflect->getProperties();
         foreach ($r as $r1) {
             echo $r1->getDocComment()."<br>";
-        }
+        }*/
 
 
         return $reflect->getDefaultProperties();
@@ -151,7 +151,7 @@ class funcion{
             $obj = $this->getValor($object,$Field);
 
             if($this->isPrimary($object,$Field)){
-                $f .=$Field."=".$obj." ";
+                $f .=$Field."=".$this->sqlData($obj)." ";
             }
         }
         return $query.$f;
