@@ -83,6 +83,21 @@ class funcion{
         return (strpos($reflect->getProperty($nombre)->getDocComment(), '@Id') !== false);
     }
 
+    public function sqlData($obj){
+
+        if(gettype($obj) == "integer" || gettype($obj) == "double"){
+            return $obj.",";
+        }else if(gettype($obj) == "string"){
+            $obj = str_replace("''","&#039;",$obj);
+            return "'".$obj."',";
+        }else if(gettype($obj) == "object"){
+            return "'".$obj."',";
+        }else{
+            return "null,";
+        }
+
+    }
+
     /**
      * @param $object
      * @return string
@@ -96,15 +111,7 @@ class funcion{
         foreach ($Fields as $Field => $value) {
             $filas .= $Field.",";
             $obj = $this->getValor($object,$Field);
-            if(gettype($obj) == "integer" || gettype($obj) == "double"){
-                $valor .=$obj.",";
-            }else if(gettype($obj) == "string"){
-                $valor .="'".$obj."',";
-            }else if(gettype($obj) == "object"){
-                $valor .="'".$obj."',";
-            }else{
-                $valor .="null,";
-            }
+            $valor.=$this->sqlData($obj);
         }
 
         $filas = substr($filas,0,strlen($filas)-1).")";
@@ -120,13 +127,7 @@ class funcion{
         $Fields = $this->getProperty($object);
         foreach ($Fields as $Field => $value) {
             $obj = $this->getValor($object,$Field);
-            if(gettype($obj) == "integer" || gettype($obj) == "double"){
-                $valor .=$Field."=".$obj.",";
-            }else if(gettype($obj) == "string"){
-                $valor .=$Field."='".$obj."',";
-            }else if(gettype($obj) == "object"){
-                $valor .=$Field."='".$obj."',";
-            }
+            $valor.=$this->sqlData($obj);
 
             if($this->isPrimary($object,$Field)){
                 $filas .=$Field."=".$obj." ";
