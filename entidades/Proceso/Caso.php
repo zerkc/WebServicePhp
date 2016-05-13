@@ -22,6 +22,10 @@ class Caso {
      * @ManyToOne
      */
     private $Parroquia_id;
+    /**
+     * @OneToMany(entity=Animal_has_Caso)
+     */
+    private $animal_caso;
 
     public function getId() {
         return $this->id;

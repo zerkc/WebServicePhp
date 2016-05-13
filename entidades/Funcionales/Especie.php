@@ -18,7 +18,10 @@ class Especie {
      */
     private $id;
     private $nombre;
-
+    /**
+     * @OneToMany(entity=Animal)
+     */
+    private $animal;
     public function getId() {
         return $this->id;
     }

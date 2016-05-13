@@ -22,6 +22,10 @@ class Vacunacion {
      * @ManyToOne
      */
     private $Semana_id;
+    /**
+     * @OneToMany(entity=Vacunacion_has_Animal)
+     */
+    private $vacunacion_animal;
 
     public function getId() {
         return $this->id;

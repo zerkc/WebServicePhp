@@ -17,7 +17,11 @@ $an = new AnnotationManager();
 $us = new Usuario();
 
 $fn = new funcion();
-$an->getManyToOn($us,"id");
+//$an->getManyToOn($us,"id");
+
+
+$fn->crearQuery("SELECT * FROM Usuario WHERE id=:id AND nombre=:n AND apellido=:a",array("id"=>1234,"n"=>"Gustavo'G","a"=>"Gonzalez"),12,-1);
+
 echo"<br><br><br> <hr>";
 
 

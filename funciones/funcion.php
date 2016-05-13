@@ -93,14 +93,15 @@ class funcion {
      */
     public function sqlData($obj) {
         if (gettype($obj) == "integer" || gettype($obj) == "double") {
-            return $obj . ",";
+            return $obj . "";
         } else if (gettype($obj) == "string") {
             $obj = str_replace("'", "&#039;", $obj);
-            return "'" . $obj . "',";
+            return "'" . $obj . "'";
         } else if (gettype($obj) == "object") {
-            return "'" . $obj . "',";
+            $obj = str_replace("'", "&#039;", $obj);
+            return "'" . $obj . "'";
         } else {
-            return "null,";
+            return "null";
         }
     }
 
@@ -117,7 +118,7 @@ class funcion {
         foreach ($Fields as $Field => $value) {
             $filas .= $Field . ",";
             $obj = $this->getValor($object, $Field);
-            $valor.=$this->sqlData($obj);
+            $valor.=$this->sqlData($obj).", ";
         }
 
         $filas = substr($filas, 0, strlen($filas) - 1) . ")";
@@ -137,9 +138,9 @@ class funcion {
         $Fields = $this->getProperty($object);
         foreach ($Fields as $Field => $value) {
             $obj = $this->getValor($object, $Field);
-            $valor.=$this->sqlData($obj);
+            $valor.=$this->sqlData($obj).", ";
             if ($this->isPrimary($object, $Field)) {
-                $filas .=$Field . "=" . $this->sqlData($obj) . " ";
+                $filas .=$Field . "=" . $this->sqlData($obj) . ", ";
             }
         }
         $valor = substr($valor, 0, strlen($valor) - 1) . "";
@@ -159,10 +160,33 @@ class funcion {
             $obj = $this->getValor($object, $Field);
 
             if ($this->isPrimary($object, $Field)) {
-                $f .=$Field . "=" . $this->sqlData($obj) . " ";
+                $f .=$Field . "=" . $this->sqlData($obj) . ", ";
             }
         }
         return $query . $f;
+    }
+
+    public function crearQuery($query,$parametros,$cantidad,$inicio){
+        $subQuery = $query;
+        if(strpos($subQuery,":") !== false) {
+            while (strpos($subQuery, ":") !== false) {
+                $subQuery = substr($subQuery, strpos($subQuery, ":"));
+                $final = strlen($subQuery);
+                if (strpos($subQuery, " ") !== false) {
+                    $final = strpos($subQuery, " ");
+                }
+                $key = substr($subQuery, strpos($subQuery, ":") + 1, $final - strpos($subQuery, ":") - 1);
+                $query = str_replace(":".$key,$this->sqlData($parametros[$key]),$query);
+                $subQuery = substr($subQuery, $final);
+            }
+        }
+        if($cantidad > 0){
+            $query.=" limit $cantidad";
+        }
+        if($inicio > 0){
+            $query.=" offset $inicio";
+        }
+        echo $query;
     }
 
 }

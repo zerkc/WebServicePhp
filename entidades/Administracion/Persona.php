@@ -21,6 +21,14 @@ class Persona {
     private $apellido;
     private $cedula;
     private $correo;
+    /**
+     * @OneToMany(entity=Cliente)
+     */
+    private $Clientes;
+    /**
+     * @OneToMany(entity=Usuario)
+     */
+    private $Usuarios;
 
     public function getId() {
         return $this->id;

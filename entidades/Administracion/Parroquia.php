@@ -22,6 +22,10 @@ class Parroquia {
      * @ManyToOne
      */
     private $Municipio_id;
+    /**
+     * @OneToMany(entity=Semana_has_Parroquia)
+     */
+    private $semana_parroquia;
 
     public function getId() {
         return $this->id;

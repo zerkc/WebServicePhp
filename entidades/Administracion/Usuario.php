@@ -10,8 +10,6 @@ class Usuario{
 
     /**
      * @Id
-     * @ManyToOne(name="Gustavo",length=5)
-     * @OneToMany(name="no se pepe")
      */
     private $id;
     private $usuario;

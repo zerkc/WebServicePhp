@@ -19,13 +19,17 @@ class Semana {
     private $id;
     private $semana;
     private $year;
+    /**
+     * @OneToMany(entity=Semana_has_Parroquia)
+     */
+    private $semana_parroquia;
 
     public function getId() {
         return $this->id;
     }
 
     public function getSemana() {
-        return $this->Semana;
+        return $this->semana;
     }
 
     public function getYear() {
@@ -36,8 +40,8 @@ class Semana {
         $this->id = $id;
     }
 
-    public function setSemana($Semana) {
-        $this->Semana = $Semana;
+    public function setSemana($semana) {
+        $this->semana = $semana;
     }
 
     public function setYear($year) {

@@ -18,6 +18,10 @@ class Municipio {
      */
     private $id;
     private $nombre;
+    /**
+     * @OneToMany(entity=Parroquia)
+     */
+    private $municipio;
 
     public function getId() {
         return $this->id;
