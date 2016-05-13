@@ -15,12 +15,12 @@ class Semana_has_Parroquia {
 
     /**
      * @Id
-     * @ManyToOne
+     * @ManyToOne(entity=Semana)
      */
     private $Semana_id;
     /**
      * @Id
-     * @ManyToOne
+     * @ManyToOne(entity=Parroquia)
      */
     private $Parroquia_id;
 

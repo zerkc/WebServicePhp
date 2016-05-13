@@ -10,6 +10,7 @@ include ("entidades/Administracion/Usuario.php");
 include ("funciones/funcion.php");
 include("funciones/AnnotationManager.php");
 include("funciones/QueryBuilder.php");
+include("entidades/Administracion/Persona.php");
 
 $an = new AnnotationManager();
 
@@ -19,6 +20,7 @@ $us = new Usuario();
 
 $fn = new funcion();
 
+echo "<hr>".$fn->newObject("Usuario",null);
 $qb->
 agregarCondicion("Nombre","Like","%Gustavo%",true,true)->
 agregarCondicion("Apellido","Like",null,true,false)->

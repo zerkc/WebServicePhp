@@ -19,7 +19,7 @@ class Vacunacion {
     private $id;
     private $fechaElaboracion;
     /**
-     * @ManyToOne
+     * @ManyToOne(entity=Semana)
      */
     private $Semana_id;
     /**

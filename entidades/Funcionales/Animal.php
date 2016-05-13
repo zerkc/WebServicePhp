@@ -19,7 +19,7 @@ class Animal {
     private $id;
     private $nombre;
     /**
-     * @ManyToOne
+     * @ManyToOne(entity=Especie)
      */
     private $Especie_id;
     /**

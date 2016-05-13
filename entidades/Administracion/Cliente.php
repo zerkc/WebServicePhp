@@ -20,11 +20,11 @@ class Cliente {
     private $telefono;
     private $direccion;
     /**
-     * @ManyToOne
+     * @ManyToOne(entity=Parroquia)
      */
     private $Parroquia_id;
     /**
-     * @ManyToOne
+     * @ManyToOne(entity=Persona)
      */
     private $Persona_id;
 

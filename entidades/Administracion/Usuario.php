@@ -16,11 +16,11 @@ class Usuario{
     private $contrasena;
     private $fechaNacimiento;
     /**
-     * @ManyToOne
+     * @ManyToOne(entity=?)
      */
     private $Permiso_id;
     /**
-     * @ManyToOne
+     * @ManyToOne(entity=Persona)
      */
     private $Persona_id;
 

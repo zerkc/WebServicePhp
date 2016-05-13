@@ -15,12 +15,12 @@ class Animal_has_Caso {
 
     /**
      * @Id
-     * @ManyToOne
+     * @ManyToOne(entity=Animal)
      */
     private $Animal_id;
     /**
      * @Id
-     * @ManyToOne
+     * @ManyToOne(entity=Caso)
      */
     private $Caso_id;
     private $cantidadIngresado;

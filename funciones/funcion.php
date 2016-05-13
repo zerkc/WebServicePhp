@@ -10,8 +10,6 @@
 
 class funcion {
 
-
-
     /**
      * @param type $objeto
      * @return type
@@ -88,7 +86,11 @@ class funcion {
      */
     public function isPrimary($object, $nombre) {
         $reflect = new ReflectionClass($object);
-        return (strpos($reflect->getProperty($nombre)->getDocComment(), '@Id') !== false);
+        return $this->containsAnnotation($reflect->getProperty($nombre), '@Id');
+    }
+
+    public function containsAnnotation($property,$annotation){
+        return (strpos($property->getDocComment(), $annotation) !== false);
     }
 
     /**
@@ -191,6 +193,35 @@ class funcion {
             $query.=" offset $inicio";
         }
         echo $query;
+    }
+
+    /**
+     *
+     */
+    public function newObject($class,$parametros){
+        $reflexion = new ReflectionClass($class);
+        $AM = new AnnotationManager();
+        $instance = $reflexion->newInstanceWithoutConstructor();
+        $param = $this->getProperty($instance);
+        foreach($param as $key => $value) {
+            if($this->containsAnnotation($reflexion->getProperty($key),'@ManyToOne')){
+                $ManyToOne = $AM->getManyToOn($class,$key);
+                echo $ManyToOne["entity"];
+                if($ManyToOne["entity"] != "?") {
+                    $Fields = $this->getProperty($ManyToOne["entity"]);
+                    print_r($Fields);
+                }
+                /*foreach ($Fields as $Field => $v) {
+                    $obj = $this->getValor($object, $Field);
+                    $valor.=$this->sqlData($obj).", ";
+                    if ($this->isPrimary($object, $Field)) {
+                        $filas .=$Field . "=" . $this->sqlData($obj) . ", ";
+                    }
+                }*/
+            }else {
+                $this->setValor($instance, $key, $value);
+            }
+        }
     }
 
 }

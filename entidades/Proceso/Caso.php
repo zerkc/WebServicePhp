@@ -19,7 +19,7 @@ class Caso {
     private $id;
     private $fechaElaboracion;
     /**
-     * @ManyToOne
+     * @ManyToOne(entity=Parroquia)
      */
     private $Parroquia_id;
     /**

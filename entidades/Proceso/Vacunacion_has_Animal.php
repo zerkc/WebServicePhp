@@ -15,17 +15,17 @@ class Vacunacion_has_Animal {
 
     /**
      * @Id
-     * @ManyToOne
+     * @ManyToOne(entity=Usuario)
      */
     private $Usuario_id;
     /**
      * @Id
-     * @ManyToOne
+     * @ManyToOne(entity=Vacunacion)
      */
     private $Vacunacion_id;
     /**
      * @Id
-     * @ManyToOne
+     * @ManyToOne(entity=Animal)
      */
     private $Animal_id;
     private $cantidad;

@@ -21,11 +21,11 @@ class Novedades {
     private $nombre;
     private $descripcion;
     /**
-     * @ManyToOne
+     * @ManyToOne(entity=Cliente)
      */
     private $Cliente_id;
     /**
-     * @ManyToOne
+     * @ManyToOne(entity=Usuario)
      */
     private $Usuario_id;
 

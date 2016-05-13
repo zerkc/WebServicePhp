@@ -19,7 +19,7 @@ class Parroquia {
     private $id;
     private $nombre;
     /**
-     * @ManyToOne
+     * @ManyToOne(entity=Municipio)
      */
     private $Municipio_id;
     /**
