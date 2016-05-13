@@ -6,7 +6,11 @@
  * Date: 21/04/2016
  * Time: 07:03 PM
  */
+
+
 class funcion {
+
+
 
     /**
      * @param type $objeto

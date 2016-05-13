@@ -9,17 +9,22 @@
 include ("entidades/Administracion/Usuario.php");
 include ("funciones/funcion.php");
 include("funciones/AnnotationManager.php");
+include("funciones/QueryBuilder.php");
 
 $an = new AnnotationManager();
 
-
+$qb = new QueryBuilder("SELECT * FROM Usuario ");
 
 $us = new Usuario();
 
 $fn = new funcion();
-//$an->getManyToOn($us,"id");
 
+$qb->
+agregarCondicion("Nombre","Like","%Gustavo%",true,true)->
+agregarCondicion("Apellido","Like",null,true,false)->
+ejecutarQuery1(-1);
 
+echo"<br><br><br> <hr>";
 $fn->crearQuery("SELECT * FROM Usuario WHERE id=:id AND nombre=:n AND apellido=:a",array("id"=>1234,"n"=>"Gustavo'G","a"=>"Gonzalez"),12,-1);
 
 echo"<br><br><br> <hr>";
