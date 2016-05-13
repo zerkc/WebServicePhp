@@ -6,12 +6,12 @@
  * Date: 12/05/16
  * Time: 08:46 AM
  */
-class AnnotationManager
-{
+class AnnotationManager{
+    
     /**
-     * @param $object
-     * @param $nombre
-     * @return array
+     * @param $object instancia de la clase de donde se obtendran las anotaciones
+     * @param $nombre nombre del campo de la instancia a obtener las anotaciones
+     * @return array devuelve un array de las propiedades con sus valores de las anotaciones
      */
     public function getManyToOn($object,$nombre){
         $reflect = new ReflectionClass($object);
@@ -20,9 +20,9 @@ class AnnotationManager
     }
 
     /**
-     * @param $object
-     * @param $nombre
-     * @return array
+     * @param $object instancia de la clase de donde se obtendran las anotaciones
+     * @param $nombre nombre del campo de la instancia a obtener las anotaciones
+     * @return array devuelve un array de las propiedades con sus valores de las anotaciones
      */
     public function getOneToMany($object,$nombre){
         $reflect = new ReflectionClass($object);
@@ -51,10 +51,8 @@ class AnnotationManager
                         break;
                     }
                     $postInicial = strpos($subValor,"=");
-
                     $key = substr($subValor,0,$postInicial);
                     $value = substr($subValor,$postInicial+1,$posFinal-$postInicial-1);
-
                     $array = array_merge($array,array($key => $value));
                     $subValor = substr($subValor,$posFinal+1);
                 }
@@ -62,5 +60,4 @@ class AnnotationManager
         }
         return $array;
     }
-
 }

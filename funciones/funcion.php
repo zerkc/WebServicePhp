@@ -6,18 +6,14 @@
  * Date: 21/04/2016
  * Time: 07:03 PM
  */
-class funcion{
+class funcion {
 
-
-    public function getProperty($objeto){
+    /**
+     * @param type $objeto
+     * @return type
+     */
+    public function getProperty($objeto) {
         $reflect = new ReflectionClass($objeto);
-
-        /*$r = $reflect->getProperties();
-        foreach ($r as $r1) {
-            echo $r1->getDocComment()."<br>";
-        }*/
-
-
         return $reflect->getDefaultProperties();
     }
 
@@ -26,16 +22,14 @@ class funcion{
      * @param $nombre
      * @return mixed
      */
-    public function getValor($object,$nombre){
-
+    public function getValor($object, $nombre) {
         $reflect = new ReflectionClass($object);
         $methods = $reflect->getMethods();
         foreach ($methods as $method) {
-            if(strtolower($method->getName()) == "get".strtolower($nombre)){
+            if (strtolower($method->getName()) == "get" . strtolower($nombre)) {
                 $metodoReflexionado = new ReflectionMethod($reflect->getName(), $method->getName());
                 return $metodoReflexionado->invoke($object);
             }
-
         }
         return null;
     }
@@ -46,114 +40,129 @@ class funcion{
      * @param $value
      * @return mixed
      */
-    public function setValor($object,$nombre,$value){
-
+    public function setValor($object, $nombre, $value) {
         $reflect = new ReflectionClass($object);
         $methods = $reflect->getMethods();
         foreach ($methods as $method) {
-            if(strtolower($method->getName()) == "set".strtolower($nombre)){
+            if (strtolower($method->getName()) == "set" . strtolower($nombre)) {
                 $metodoReflexionado = new ReflectionMethod($reflect->getName(), $method->getName());
-                return $metodoReflexionado->invoke($object,$value);
+                return $metodoReflexionado->invoke($object, $value);
             }
-
         }
         return null;
     }
 
-    public function getArray($object){
+    /**
+     * @param type $object
+     * @return type
+     */
+    public function getArray($object) {
         $fields = $this->getProperty($object);
         $array = Array();
         foreach ($fields as $key => $value) {
-            $array = array_merge($array,array($key => $this->getValor($object,$key)));
+            $array = array_merge($array, array($key => $this->getValor($object, $key)));
         }
-
         return $array;
     }
 
-    public function setArray($object,$array){
+    /**
+     * @param type $object
+     * @param type $array
+     * @return type
+     */
+    public function setArray($object, $array) {
         foreach ($array as $key => $value) {
-            $this->setValor($object,$key,$value);
+            $this->setValor($object, $key, $value);
         }
-
         return $object;
     }
 
-    public function isPrimary($object,$nombre){
+    /**
+     * @param type $object
+     * @param type $nombre
+     * @return type
+     */
+    public function isPrimary($object, $nombre) {
         $reflect = new ReflectionClass($object);
         return (strpos($reflect->getProperty($nombre)->getDocComment(), '@Id') !== false);
     }
 
-    public function sqlData($obj){
-
-        if(gettype($obj) == "integer" || gettype($obj) == "double"){
-            return $obj.",";
-        }else if(gettype($obj) == "string"){
-            $obj = str_replace("'","&#039;",$obj);
-            return "'".$obj."',";
-        }else if(gettype($obj) == "object"){
-            return "'".$obj."',";
-        }else{
+    /**
+     * @param type $obj
+     * @return string
+     */
+    public function sqlData($obj) {
+        if (gettype($obj) == "integer" || gettype($obj) == "double") {
+            return $obj . ",";
+        } else if (gettype($obj) == "string") {
+            $obj = str_replace("'", "&#039;", $obj);
+            return "'" . $obj . "',";
+        } else if (gettype($obj) == "object") {
+            return "'" . $obj . "',";
+        } else {
             return "null,";
         }
-
     }
 
     /**
      * @param $object
      * @return string
      */
-    public function createInsert($object){
+    public function createInsert($object) {
         $reflect = new ReflectionClass($object);
-        $query = "INSERT INTO ".$reflect->getName()." ";
+        $query = "INSERT INTO " . $reflect->getName() . " ";
         $filas = " (";
         $valor = " VALUES(";
         $Fields = $this->getProperty($object);
         foreach ($Fields as $Field => $value) {
-            $filas .= $Field.",";
-            $obj = $this->getValor($object,$Field);
+            $filas .= $Field . ",";
+            $obj = $this->getValor($object, $Field);
             $valor.=$this->sqlData($obj);
         }
 
-        $filas = substr($filas,0,strlen($filas)-1).")";
-        $valor = substr($valor,0,strlen($valor)-1).")";
-        return $query.$filas.$valor;
+        $filas = substr($filas, 0, strlen($filas) - 1) . ")";
+        $valor = substr($valor, 0, strlen($valor) - 1) . ")";
+        return $query . $filas . $valor;
     }
 
-    public function createUpdate($object){
+    /**
+     * @param type $object
+     * @return type
+     */
+    public function createUpdate($object) {
         $reflect = new ReflectionClass($object);
-        $query = "UPDATE ".$reflect->getName()." SET ";
+        $query = "UPDATE " . $reflect->getName() . " SET ";
         $filas = " WHERE ";
         $valor = " ";
         $Fields = $this->getProperty($object);
         foreach ($Fields as $Field => $value) {
-            $obj = $this->getValor($object,$Field);
+            $obj = $this->getValor($object, $Field);
             $valor.=$this->sqlData($obj);
-
-            if($this->isPrimary($object,$Field)){
-                $filas .=$Field."=".$this->sqlData($obj)." ";
+            if ($this->isPrimary($object, $Field)) {
+                $filas .=$Field . "=" . $this->sqlData($obj) . " ";
             }
         }
-
-        $valor = substr($valor,0,strlen($valor)-1)."";
-        return $query.$valor.$filas;
+        $valor = substr($valor, 0, strlen($valor) - 1) . "";
+        return $query . $valor . $filas;
     }
 
     /**
      * @param $object
      * @return string
      */
-    public function createDelete($object){
+    public function createDelete($object) {
         $reflect = new ReflectionClass($object);
-        $query = "DELETE FROM ".$reflect->getName()." ";
+        $query = "DELETE FROM " . $reflect->getName() . " ";
         $f = " WHERE ";
         $Fields = $this->getProperty($object);
         foreach ($Fields as $Field => $value) {
-            $obj = $this->getValor($object,$Field);
+            $obj = $this->getValor($object, $Field);
 
-            if($this->isPrimary($object,$Field)){
-                $f .=$Field."=".$this->sqlData($obj)." ";
+            if ($this->isPrimary($object, $Field)) {
+                $f .=$Field . "=" . $this->sqlData($obj) . " ";
             }
         }
-        return $query.$f;
+        return $query . $f;
     }
+
 }
