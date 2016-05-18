@@ -46,11 +46,12 @@ class funcion {
         $reflect = new ReflectionClass($object);
         $methods = $reflect->getMethods();
         foreach ($methods as $method) {
-            if (strtolower($method->getName()) == "set" . strtolower($nombre)) {
+            if (strtolower($method->getName()) == "set" . strtolower(str_replace("_","",$nombre))) {
                 $metodoReflexionado = new ReflectionMethod($reflect->getName(), $method->getName());
                 return $metodoReflexionado->invoke($object, $value);
             }
         }
+        echo "Return null $nombre <hr>";
         return null;
     }
 
@@ -204,22 +205,19 @@ class funcion {
         $instance = $reflexion->newInstanceWithoutConstructor();
         $param = $this->getProperty($instance);
         foreach($param as $key => $value) {
-            if($this->containsAnnotation($reflexion->getProperty($key),'@ManyToOne')){
-                $ManyToOne = $AM->getManyToOn($class,$key);
-                echo $ManyToOne["entity"];
-                if($ManyToOne["entity"] != "?") {
-                    $Fields = $this->getProperty($ManyToOne["entity"]);
-                    print_r($Fields);
-                }
-                /*foreach ($Fields as $Field => $v) {
-                    $obj = $this->getValor($object, $Field);
-                    $valor.=$this->sqlData($obj).", ";
-                    if ($this->isPrimary($object, $Field)) {
-                        $filas .=$Field . "=" . $this->sqlData($obj) . ", ";
+            if(isset($parametros[$key])) {
+                if ($this->containsAnnotation($reflexion->getProperty($key), '@ManyToOne')) {
+                    $ManyToOne = $AM->getManyToOn($class, $key);
+                    if (isset($ManyToOne["entity"])) {
+                        $ref = new ReflectionClass($ManyToOne["entity"]);
+                        $ins = $ref->newInstanceWithoutConstructor();
+                        $this->crearQuery("SELECT * FROM " . $ref->getName() . " WHERE id=:id", array("id" => $parametros[$key]), 1, 0);
+                        //insert result in $int
+                        $this->setValor($instance, $key, $ins);
                     }
-                }*/
-            }else {
-                $this->setValor($instance, $key, $value);
+                } else {
+                    $this->setValor($instance, $key, $parametros[$key]);
+                }
             }
         }
     }

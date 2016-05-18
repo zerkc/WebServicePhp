@@ -16,10 +16,6 @@ class Usuario{
     private $contrasena;
     private $fechaNacimiento;
     /**
-     * @ManyToOne(entity=?)
-     */
-    private $Permiso_id;
-    /**
      * @ManyToOne(entity=Persona)
      */
     private $Persona_id;
@@ -86,22 +82,6 @@ class Usuario{
     public function setFechaNacimiento($fechaNacimiento)
     {
         $this->fechaNacimiento = $fechaNacimiento;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPermisoId()
-    {
-        return $this->Permiso_id;
-    }
-
-    /**
-     * @param mixed $Permiso_id
-     */
-    public function setPermisoId($Permiso_id)
-    {
-        $this->Permiso_id = $Permiso_id;
     }
 
     /**

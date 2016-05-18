@@ -20,7 +20,7 @@ $us = new Usuario();
 
 $fn = new funcion();
 
-echo "<hr>".$fn->newObject("Usuario",null);
+echo "<hr>".$fn->newObject("Usuario",array("Persona_id"=>1));
 $qb->
 agregarCondicion("Nombre","Like","%Gustavo%",true,true)->
 agregarCondicion("Apellido","Like",null,true,false)->
