@@ -173,7 +173,7 @@ class funcion {
         return $query . $f;
     }
 
-    public function crearQuery($query,$parametros,$cantidad,$inicio){
+    public function crearQuery($query,$parametros,$cantidad,$inicio=-1){
         $subQuery = $query;
         if(strpos($subQuery,":") !== false) {
             while (strpos($subQuery, ":") !== false) {
