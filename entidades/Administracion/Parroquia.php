@@ -16,16 +16,16 @@ class Parroquia {
     /**
      * @Id
      */
-    private $id;
-    private $nombre;
+    public $id;
+    public $nombre;
     /**
      * @ManyToOne(entity=Municipio)
      */
-    private $Municipio_id;
+    public $Municipio_id;
     /**
      * @OneToMany(entity=Semana_has_Parroquia)
      */
-    private $semana_parroquia;
+    public $semana_parroquia;
 
     public function getId() {
         return $this->id;

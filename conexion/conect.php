@@ -7,14 +7,30 @@
  */
 
 
-$host = "localhost";
-$user = "root";
-$pass = "";
-$db = "mydb";
 
 
-$conect = mysqli_connect($host,$user,$pass,$db);
+final class conexion
+{
+    private $con;
+    private $host = "localhost";
+    private $user = "root";
+    private $pass = "";
+    private $db = "zoonosis";
+    /**
+     * conexion constructor.
+     */
+    public function __construct()
+    {
+        $conect = mysqli_connect($this->host, $this->user, $this->pass, $this->db);
+        if (!$conect)
+        {
+            die(mysqli_error($conect));
+        }
+        $this->con = $conect;
+    }
 
-if(!$conect){
-    die(mysqli_error($conect));
+    public function getCon(){
+        return $this->con;
+    }
+
 }

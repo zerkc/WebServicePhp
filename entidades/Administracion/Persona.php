@@ -16,11 +16,11 @@ class Persona {
     /**
      * @Id
      */
-    private $id;
-    private $nombre;
-    private $apellido;
-    private $cedula;
-    private $correo;
+    public $id;
+    public $nombre;
+    public $apellido;
+    public $cedula;
+    public $correo;
     /**
      * @OneToMany(entity=Cliente)
      */

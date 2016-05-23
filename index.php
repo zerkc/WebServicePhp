@@ -5,7 +5,7 @@
  * Date: 21/04/2016
  * Time: 06:55 PM
  */
-//include("conexion/conect.php");
+include("conexion/conect.php");
 include ("entidades/Administracion/Usuario.php");
 include ("funciones/funcion.php");
 include("funciones/AnnotationManager.php");
@@ -20,14 +20,15 @@ $us = new Usuario();
 
 $fn = new funcion();
 
-echo "<hr>".$fn->newObject("Usuario",array("Persona_id"=>1));
 $qb->
 agregarCondicion("Nombre","Like","%Gustavo%",true,true)->
 agregarCondicion("Apellido","Like",null,true,false)->
 ejecutarQuery(-1);
 
 echo"<br><br><br> <hr>";
-$fn->crearQuery("SELECT * FROM Usuario WHERE id=:id AND nombre=:n AND apellido=:a",array("id"=>1234,"n"=>"Gustavo'G","a"=>"Gonzalez"),12,-1);
+$query = $fn->crearQuery("SELECT * FROM Persona ",null,-1,-1);
+echo"<br><br><br> ..-<hr>";
+print_r($query);
 
 echo"<br><br><br> <hr>";
 
@@ -36,8 +37,8 @@ print_r($fn->getProperty($us));
 
 
 
-echo "<br>".json_encode($fn->getArray($us))."<br>";
-echo json_encode(get_object_vars($us));
+echo "<br>".json_encode(($query[0]))."<br>";
+echo json_encode(get_object_vars($query[0]));
 
 $fn->setArray($us,json_decode("{\"id\":1443,\"usuario\":\"hola mundo\",\"contrasena\":null,\"fechaNacimiento\":null,\"Permiso_id\":null,\"Persona_id\":null}"));
 

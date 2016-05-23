@@ -7,6 +7,7 @@
  * Time: 07:03 PM
  */
 
+//include '../conexion/conect.php';
 
 class funcion {
 
@@ -129,7 +130,7 @@ class funcion {
         }
 
         $filas = substr($filas, 0, strlen($filas) - 1) . ")";
-        $valor = substr($valor, 0, strlen($valor) - 1) . ")";
+        $valor = substr($valor, 0, strlen($valor) - 2) . ")";
         return $query . $filas . $valor;
     }
 
@@ -145,12 +146,13 @@ class funcion {
         $Fields = $this->getProperty($object);
         foreach ($Fields as $Field => $value) {
             $obj = $this->getValor($object, $Field);
-            $valor.=$this->sqlData($obj).", ";
+            $valor.=$Field."=".$this->sqlData($obj).", ";
             if ($this->isPrimary($object, $Field)) {
                 $filas .=$Field . "=" . $this->sqlData($obj) . ", ";
             }
         }
-        $valor = substr($valor, 0, strlen($valor) - 1) . "";
+        $valor = substr($valor, 0, strlen($valor) - 2) . "";
+        $filas = substr($filas, 0, strlen($filas) - 2) . "";
         return $query . $valor . $filas;
     }
 
@@ -170,6 +172,9 @@ class funcion {
                 $f .=$Field . "=" . $this->sqlData($obj) . ", ";
             }
         }
+
+        $f = substr($f, 0, strlen($f) - 2) . "";
+
         return $query . $f;
     }
 
@@ -193,7 +198,42 @@ class funcion {
         if($inicio > 0){
             $query.=" offset $inicio";
         }
-        echo $query;
+        return $this->ejecutarQuery($query);
+    }
+
+    public function ejecutarQuery($query){
+        $resultados = array();
+        $entidad = $this->getEntiyQuery($query);
+        $conexion = new conexion();
+        $con = $conexion->getCon();
+        $result = $con->query($query);
+        if($result !== false){
+            while($row = $result->fetch_array(MYSQLI_ASSOC)){
+                $obj =$this->newObject($entidad,$row);
+                $resultados = array_merge($resultados,array($obj));
+            }
+        }
+        return $resultados;
+    }
+
+    public function getEntiyQuery($query){
+        if(strpos(strtolower($query),"select") !== false){
+            $q = preg_split("/ /",$query);
+            $variable = "";
+            for($i = 0; $i<count($q);$i++){
+                if($q[$i] == "*"){
+                    return $q[$i+2];
+                }else if(preg_match("/[a-zA-Z]+[0-9]{0,}\\.\\*/",$q[$i])){
+                    $variable = str_replace(".*","",$q[$i]);
+                }else if($q[$i] == $variable){
+                    return $q[$i-1];
+                }
+            }
+        }
+    }
+
+    private function isEndQuery($sentence){
+
     }
 
     /**
@@ -220,6 +260,7 @@ class funcion {
                 }
             }
         }
+        return $instance;
     }
 
 }
