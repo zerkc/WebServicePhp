@@ -16,12 +16,21 @@
  * limitations under the License.
  */
 
-include("../../../funciones/QueryBuilder.php");
-include ("../../../entidades/Administracion/Persona.php");
+include("../../../conexion/conect.php");
+include ("../../../funciones/funcion.php");
+include("../../../funciones/AnnotationManager.php");
+include ('../../../funciones/QueryBuilder.php');
+include ('../../../entidades/Administracion/Persona.php');
+include ('../../../entidades/Administracion/Cliente.php');
+include ('../../../entidades/Administracion/Usuario.php');
+
+
 $cedula = isset($_GET['cedula']) ? $_GET['cedula'] : NULL;
 if ($cedula == NULL) {
     die('El parametro cedula es requerido');
 }
 $qb = new QueryBuilder("SELECT * FROM Persona");
-$qb->agregarCondicion("cedula", "=", $cedula, false, true)
-        ->ejecutarQuery(-1);
+$query = $qb->agregarCondicion("cedula", "=", $cedula, false, true)
+        ->ejecutarQuery();
+
+echo json_encode($query);

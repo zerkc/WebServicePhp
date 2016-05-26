@@ -21,34 +21,30 @@ class Parroquia {
     /**
      * @ManyToOne(entity=Municipio)
      */
-    public $Municipio_id;
-    /**
-     * @OneToMany(entity=Semana_has_Parroquia)
-     */
-    public $semana_parroquia;
+    public $municipio_id;
 
-    public function getId() {
+    function getId() {
         return $this->id;
     }
 
-    public function getNombre() {
+    function getNombre() {
         return $this->nombre;
     }
 
-    public function getMunicipio_id() {
-        return $this->Municipio_id;
+    function getMunicipio_id() {
+        return $this->municipio_id;
     }
 
-    public function setId($id) {
-        $this->id = $id;
+    function setId($id) {
+        $this->id = ceil($id);
     }
 
-    public function setNombre($nombre) {
+    function setNombre($nombre) {
         $this->nombre = $nombre;
     }
 
-    public function setMunicipio_id($Municipio_id) {
-        $this->Municipio_id = $Municipio_id;
+    function setMunicipio_id($municipio_id) {
+        $this->municipio_id = $municipio_id;
     }
 
 }

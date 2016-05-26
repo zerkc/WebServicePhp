@@ -16,27 +16,37 @@ class Municipio {
     /**
      * @Id
      */
-    private $id;
-    private $nombre;
-    /**
-     * @OneToMany(entity=Parroquia)
-     */
-    private $municipio;
+    public $id;
+    public $nombre;
 
-    public function getId() {
+    /**
+     * @OneToMany(entity=Parroquia,mappedBy=municipio_id)
+     */
+    public $parroquia;
+    
+    function getId() {
         return $this->id;
     }
 
-    public function getNombre() {
+    function getNombre() {
         return $this->nombre;
     }
 
-    public function setId($id) {
-        $this->id = $id;
+    function getParroquia() {
+        return $this->parroquia;
     }
 
-    public function setNombre($nombre) {
+    function setId($id) {
+        $this->id = ceil($id);
+    }
+
+    function setNombre($nombre) {
         $this->nombre = $nombre;
     }
+
+    function setParroquia($parroquia) {
+        $this->parroquia = $parroquia;
+    }
+
 
 }

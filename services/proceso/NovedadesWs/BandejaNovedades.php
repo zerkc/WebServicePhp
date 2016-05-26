@@ -17,8 +17,12 @@
  */
 
 
-include("../../../funciones/QueryBuilder.php");
+include("../../../conexion/conect.php");
+include ("../../../funciones/funcion.php");
+include("../../../funciones/AnnotationManager.php");
+include ('../../../funciones/QueryBuilder.php');
 include ("../../../entidades/Proceso/Novedades.php");
+require ('../../../pojos/busquedaspojo.php');
 
 $nombre = isset($_GET['nombre']) ? "LOWER('%" . $_GET['nombre'] . "%')" : NULL;
 $desde = isset($_GET['desde']) ? $_GET['desde'] : NULL;
@@ -27,13 +31,15 @@ $inicio = isset($_GET['inicio']) ? $_GET['inicio'] : -1;
 $cantidad = isset($_GET['cantidad']) ? $_GET['cantidad'] : 10;
 
 $qb = new QueryBuilder("SELECT * FROM Novedades");
-$qb->agregarCondicion("LOWER(nombre)", "LIKE", $nombre, true, true)->
+$resultado=$qb->agregarCondicion("LOWER(nombre)", "LIKE", $nombre, true, true)->
         agregarCondicion("fechaElaboracion", ">", $desde, true, true)->
         agregarCondicion("fechaElaboracion", "<", $hasta, true, true)->
         ejecutarQuery($cantidad, $inicio);
-echo '<br><br>';
-$qb->agregarQuery("SELECT count(*) FROM Novedades");
-$qb->agregarCondicion("LOWER(nombre)", "LIKE", $nombre, true, true)->
-        agregarCondicion("fechaElaboracion", ">", $desde, true, true)->
-        agregarCondicion("fechaElaboracion", "<", $hasta, true, true)->
-        ejecutarQuery(-1);
+
+//$qb->agregarQuery("SELECT count(*) FROM Novedades");
+//$qb->agregarCondicion("LOWER(nombre)", "LIKE", $nombre, true, true)->
+//        agregarCondicion("fechaElaboracion", ">", $desde, true, true)->
+//        agregarCondicion("fechaElaboracion", "<", $hasta, true, true)->
+//        ejecutarQuery();
+$pojo= new BusquedasPojo(count($resultado), $resultado);
+echo json_encode($pojo);

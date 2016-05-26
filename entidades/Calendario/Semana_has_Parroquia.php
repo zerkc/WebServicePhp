@@ -17,27 +17,28 @@ class Semana_has_Parroquia {
      * @Id
      * @ManyToOne(entity=Semana)
      */
-    private $Semana_id;
+    public $semana_id;
+
     /**
      * @Id
      * @ManyToOne(entity=Parroquia)
      */
-    private $Parroquia_id;
+    public $parroquia_id;
 
-    public function getSemana_id() {
-        return $this->Semana_id;
+    function getSemana_id() {
+        return $this->semana_id;
     }
 
-    public function getParroquia_id() {
-        return $this->Parroquia_id;
+    function getParroquia_id() {
+        return $this->parroquia_id;
     }
 
-    public function setSemana_id($Semana_id) {
-        $this->Semana_id = $Semana_id;
+    function setSemana_id($semana_id) {
+        $this->semana_id = $semana_id;
     }
 
-    public function setParroquia_id($Parroquia_id) {
-        $this->Parroquia_id = $Parroquia_id;
+    function setParroquia_id($parroquia_id) {
+        $this->parroquia_id = $parroquia_id;
     }
 
 }

@@ -51,10 +51,13 @@ class QueryBuilder {
         return $this;
     }
 
-    public function ejecutarQuery($cantidad, $inicio = -1) {
-        echo $this->query . "<hr>";
+    public function ejecutarQuery($cantidad = 1, $inicio = -1) {
         $fn = new funcion();
-        $fn->crearQuery($this->query, $this->parametros, $cantidad, $inicio);
+        $valores = $fn->crearQuery($this->query, $this->parametros, $cantidad, $inicio);
+        if ($cantidad == 1 && count($valores) > 0) {
+            return $valores[0];
+        }
+        return $valores;
     }
 
 }

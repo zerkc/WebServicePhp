@@ -16,17 +16,19 @@ class Cliente {
     /**
      * @Id
      */
-    private $id;
-    private $telefono;
-    private $direccion;
+    public $id;
+    public $telefono;
+    public $direccion;
+
     /**
      * @ManyToOne(entity=Parroquia)
      */
-    private $Parroquia_id;
+    public $Parroquia_id;
+
     /**
-     * @ManyToOne(entity=Persona)
+     * @OneToOne(entity=Persona)
      */
-    private $Persona_id;
+    public $persona_id;
 
     public function getId() {
         return $this->id;
@@ -44,12 +46,8 @@ class Cliente {
         return $this->Parroquia_id;
     }
 
-    public function getPersona_id() {
-        return $this->Persona_id;
-    }
-
     public function setId($id) {
-        $this->id = $id;
+        $this->id = ceil($id);
     }
 
     public function setTelefono($telefono) {
@@ -64,8 +62,12 @@ class Cliente {
         $this->Parroquia_id = $Parroquia_id;
     }
 
-    public function setPersona_id($Persona_id) {
-        $this->Persona_id = $Persona_id;
+    function getPersona_id() {
+        return $this->persona_id;
+    }
+
+    function setPersona_id($persona_id) {
+        $this->persona_id = $persona_id;
     }
 
 }

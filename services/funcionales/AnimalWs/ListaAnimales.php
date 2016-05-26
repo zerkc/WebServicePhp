@@ -15,9 +15,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+include("../../../conexion/conect.php");
+include ("../../../funciones/funcion.php");
+include("../../../funciones/AnnotationManager.php");
 include ('../../../funciones/QueryBuilder.php');
 include ('../../../entidades/Funcionales/Animal.php');
+include ('../../../entidades/Funcionales/Especie.php');
+include ('../../../entidades/Proceso/Animal_has_Caso.php');
+include ('../../../entidades/Proceso/Vacunacion_has_Animal.php');
 
-$qb= new QueryBuilder("SELECT * FROM Animal");
-$qb->ejecutarQuery(-1);
+$an = new AnnotationManager();
+
+$qb = new QueryBuilder("SELECT a.* FROM Animal a ORDER BY a.nombre");
+$query = $qb->ejecutarQuery(-1);
+
+echo json_encode(($query));

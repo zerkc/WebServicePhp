@@ -13,27 +13,11 @@
  */
 class BusquedasPojo {
 
-    private $cantidad;
-    private $resultados;
+    public $cantidad;
+    public $resultados;
 
     function __construct($cantidad = 0, $resultados = NULL) {
         $this->cantidad = $cantidad;
-        $this->resultados = $resultados;
-    }
-
-    function getCantidad() {
-        return $this->cantidad;
-    }
-
-    function getResultados() {
-        return $this->resultados;
-    }
-
-    function setCantidad($cantidad) {
-        $this->cantidad = $cantidad;
-    }
-
-    function setResultados($resultados) {
         $this->resultados = $resultados;
     }
 
