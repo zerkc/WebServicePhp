@@ -16,8 +16,13 @@
  * limitations under the License.
  */
 
-include("../../../funciones/QueryBuilder.php");
-include ("../../../entidades/Administracion/Cliente.php");
+include("../../../conexion/conect.php");
+include ("../../../funciones/funcion.php");
+include("../../../funciones/AnnotationManager.php");
+include ('../../../funciones/QueryBuilder.php');
+include ('../../../entidades/Administracion/Cliente.php');
 
-$qb= new QueryBuilder("SELECT c.* FROM Cliente c INNER JOIN Persona p on c.Persona_id=p.id Order By p.nombre");
-$qb->ejecutarQuery(-1);
+$qb = new QueryBuilder("SELECT c.* FROM Cliente c INNER JOIN Persona p on c.Persona_id=p.id Order By p.nombre");
+$query = $qb->ejecutarQuery(-1);
+
+echo json_encode(($query));

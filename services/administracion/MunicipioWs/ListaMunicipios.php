@@ -16,7 +16,15 @@
  * limitations under the License.
  */
 
-include ("../../../funciones/QueryBuilder.php");
 
-$qb=new QueryBuilder("SELECT * FROM Municipio Order by nombre");
-$qb->ejecutarQuery(-1);
+include("../../../conexion/conect.php");
+include ("../../../funciones/funcion.php");
+include("../../../funciones/AnnotationManager.php");
+include ('../../../funciones/QueryBuilder.php');
+include ('../../../entidades/Administracion/Municipio.php');
+include ('../../../entidades/Administracion/Parroquia.php');
+include ('../../../entidades/Calendario/Semana_has_Parroquia.php');
+
+$qb=new QueryBuilder("SELECT m.* FROM Municipio m Order by m.nombre");
+$query = $qb->ejecutarQuery(-1);
+echo json_encode(($query));

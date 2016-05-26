@@ -28,7 +28,9 @@ if ($dia == NULL) {
 include("../../../funciones/QueryBuilder.php");
 include ("../../../entidades/Proceso/Caso.php");
 
-$qb = new QueryBuilder("SELECT * FROM Caso");
-$qb->agregarCondicion("fechaElaboracion", "=", $dia)->
-        agregarCondicion("Parroquia_id", "=", ceil($parroquia))->
+$qb = new QueryBuilder("SELECT c.* FROM Caso c");
+$resultado = $qb->agregarCondicion("c.fechaElaboracion", "=", $dia)->
+        agregarCondicion("c.Parroquia_id", "=", ceil($parroquia))->
         ejecutarQuery(-1);
+
+echo json_encode($resultado);

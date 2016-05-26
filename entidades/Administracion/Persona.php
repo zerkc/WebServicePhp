@@ -20,15 +20,16 @@ class Persona {
     public $nombre;
     public $apellido;
     public $cedula;
-    public $correo;
+
     /**
-     * @OneToMany(entity=Cliente)
+     * @OneToOne(entity=Cliente,mappedBy=persona_id)
      */
-    private $Clientes;
+    public $cliente;
+
     /**
-     * @OneToMany(entity=Usuario)
+     * @OneToOne(entity=Usuario,mappedBy=persona_id)
      */
-    private $Usuarios;
+    public $usuario;
 
     public function getId() {
         return $this->id;
@@ -46,12 +47,8 @@ class Persona {
         return $this->cedula;
     }
 
-    public function getCorreo() {
-        return $this->correo;
-    }
-
     public function setId($id) {
-        $this->id = $id;
+        $this->id = ceil($id);
     }
 
     public function setNombre($nombre) {
@@ -66,8 +63,20 @@ class Persona {
         $this->cedula = $cedula;
     }
 
-    public function setCorreo($correo) {
-        $this->correo = $correo;
+    function getCliente() {
+        return $this->cliente;
+    }
+
+    function getUsuario() {
+        return $this->usuario;
+    }
+
+    function setCliente($cliente) {
+        $this->cliente = $cliente;
+    }
+
+    function setUsuario($usuario) {
+        $this->usuario = $usuario;
     }
 
 }

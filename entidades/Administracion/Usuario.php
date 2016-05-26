@@ -6,98 +6,83 @@
  * Date: 21/04/2016
  * Time: 06:58 PM
  */
-class Usuario{
+class Usuario {
 
     /**
      * @Id
      */
-    private $id;
-    private $usuario;
-    private $contrasena;
-    private $fechaNacimiento;
+    public $id;
+    public $usuario;
+    public $contrasena;
+    public $fechaNacimiento;
+
     /**
-     * @ManyToOne(entity=Persona)
+     * @OneToOne(entity=Persona)
      */
-    private $Persona_id;
+    public $persona_id;
 
     /**
      * @return mixed
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
     /**
      * @param mixed $id
      */
-    public function setId($id)
-    {
-        $this->id = $id;
+    public function setId($id) {
+        $this->id = ceil($id);
     }
 
     /**
      * @return mixed
      */
-    public function getUsuario()
-    {
+    public function getUsuario() {
         return $this->usuario;
     }
 
     /**
      * @param mixed $usuario
      */
-    public function setUsuario($usuario)
-    {
+    public function setUsuario($usuario) {
         $this->usuario = $usuario;
     }
 
     /**
      * @return mixed
      */
-    public function getContrasena()
-    {
+    public function getContrasena() {
         return $this->contrasena;
     }
 
     /**
      * @param mixed $contrasena
      */
-    public function setContrasena($contrasena)
-    {
+    public function setContrasena($contrasena) {
         $this->contrasena = $contrasena;
     }
 
     /**
      * @return mixed
      */
-    public function getFechaNacimiento()
-    {
+    public function getFechaNacimiento() {
         return $this->fechaNacimiento;
     }
 
     /**
      * @param mixed $fechaNacimiento
      */
-    public function setFechaNacimiento($fechaNacimiento)
-    {
+    public function setFechaNacimiento($fechaNacimiento) {
         $this->fechaNacimiento = $fechaNacimiento;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getPersonaId()
-    {
-        return $this->Persona_id;
+    function getPersona_id() {
+        return $this->persona_id;
     }
 
-    /**
-     * @param mixed $Persona_id
-     */
-    public function setPersonaId($Persona_id)
-    {
-        $this->Persona_id = $Persona_id;
+    function setPersona_id($persona_id) {
+        $this->persona_id = $persona_id;
     }
 
 }

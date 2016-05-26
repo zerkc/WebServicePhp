@@ -18,10 +18,12 @@ class Especie {
      */
     private $id;
     private $nombre;
+
     /**
-     * @OneToMany(entity=Animal)
+     * @OneToMany(entity=Animal,mappedBy=especie_id)
      */
-    private $animal;
+    private $animales;
+
     public function getId() {
         return $this->id;
     }
@@ -31,11 +33,19 @@ class Especie {
     }
 
     public function setId($id) {
-        $this->id = $id;
+        $this->id = ceil($id);
     }
 
     public function setNombre($nombre) {
         $this->nombre = $nombre;
+    }
+
+    function getAnimales() {
+        return $this->animales;
+    }
+
+    function setAnimales($animales) {
+        $this->animales = $animales;
     }
 
 }

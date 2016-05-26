@@ -16,20 +16,23 @@ class Animal {
     /**
      * @Id
      */
-    private $id;
-    private $nombre;
+    public $id;
+    public $nombre;
+
     /**
      * @ManyToOne(entity=Especie)
      */
-    private $Especie_id;
+    public $especie_id;
+
     /**
      * @OneToMany(entity=Animal_has_Caso)
      */
-    private $animal_caso;
+//    public $animal_caso;
+
     /**
      * @OneToMany(entity=Vacunacion_has_Animal)
      */
-    private $vacunacion_animal;
+//    public $vacunacion_animal;
 
     public function getId() {
         return $this->id;
@@ -39,20 +42,36 @@ class Animal {
         return $this->nombre;
     }
 
-    public function getEspecie_id() {
-        return $this->Especie_id;
-    }
-
     public function setId($id) {
-        $this->id = $id;
+        $this->id = ceil($id);
     }
 
     public function setNombre($nombre) {
         $this->nombre = $nombre;
     }
 
-    public function setEspecie_id($Especie_id) {
-        $this->Especie_id = $Especie_id;
+    function getEspecie_id() {
+        return $this->especie_id;
     }
+
+    function setEspecie_id($especie_id) {
+        $this->especie_id = $especie_id;
+    }
+
+//    function getAnimal_caso() {
+//        return $this->animal_caso;
+//    }
+//
+//    function getVacunacion_animal() {
+//        return $this->vacunacion_animal;
+//    }
+//
+//    function setAnimal_caso($animal_caso) {
+//        $this->animal_caso = $animal_caso;
+//    }
+//
+//    function setVacunacion_animal($vacunacion_animal) {
+//        $this->vacunacion_animal = $vacunacion_animal;
+//    }
 
 }
