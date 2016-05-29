@@ -1,5 +1,6 @@
 <?php
 
+include_once ('/../Entidad.php');
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,12 +12,8 @@
  *
  * @author GustavoG
  */
-class Persona {
+class Persona extends Entidad {
 
-    /**
-     * @Id
-     */
-    public $id;
     public $nombre;
     public $apellido;
     public $cedula;
@@ -31,10 +28,6 @@ class Persona {
      */
     public $usuario;
 
-    public function getId() {
-        return $this->id;
-    }
-
     public function getNombre() {
         return $this->nombre;
     }
@@ -47,8 +40,12 @@ class Persona {
         return $this->cedula;
     }
 
-    public function setId($id) {
-        $this->id = ceil($id);
+    public function getCliente() {
+        return $this->cliente;
+    }
+
+    public function getUsuario() {
+        return $this->usuario;
     }
 
     public function setNombre($nombre) {
@@ -63,19 +60,11 @@ class Persona {
         $this->cedula = $cedula;
     }
 
-    function getCliente() {
-        return $this->cliente;
-    }
-
-    function getUsuario() {
-        return $this->usuario;
-    }
-
-    function setCliente($cliente) {
+    public function setCliente($cliente) {
         $this->cliente = $cliente;
     }
 
-    function setUsuario($usuario) {
+    public function setUsuario($usuario) {
         $this->usuario = $usuario;
     }
 

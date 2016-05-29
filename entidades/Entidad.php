@@ -16,18 +16,27 @@
  * limitations under the License.
  */
 
-include ('../../../conexion/conect.php');
-include ('../../../funciones/AnnotationManager.php');
-include ('../../../funciones/funcion.php');
-include ('../../../funciones/QueryBuilder.php');
-include ('../../../funciones/ObjectMapper.php');
-include ('../../../entidades/Administracion/Persona.php');
-$json = file_get_contents('php://input');
-$fn= new funcion();
-$mapper = new ObjectMapper($json);
-$object = $mapper->createObject(Persona::class);
-if ($object==NULL || is_array($object)) {
-    die("Json not Valid");
+/**
+ * Description of Entidad
+ *
+ * @author angel.colina
+ */
+abstract class Entidad {
+
+    /**
+     * @Id
+     */
+    public $id;
+
+    function getId() {
+        return $this->id;
+    }
+
+    function setId($id) {
+        if (!is_null($id)) {
+            $id = ceil($id);
+        }
+        $this->id = $id;
+    }
+
 }
-var_dump($object);
-echo $fn->createInsert($object);

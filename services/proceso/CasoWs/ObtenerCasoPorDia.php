@@ -25,12 +25,15 @@ if ($dia == NULL) {
     die('Es obligatorio seleccionar una parroquia');
 }
 
-include("../../../funciones/QueryBuilder.php");
+include("../../../conexion/conect.php");
+include ("../../../funciones/funcion.php");
+include("../../../funciones/AnnotationManager.php");
+include ('../../../funciones/QueryBuilder.php');
 include ("../../../entidades/Proceso/Caso.php");
+require ('../../../pojos/busquedaspojo.php');
 
 $qb = new QueryBuilder("SELECT c.* FROM Caso c");
 $resultado = $qb->agregarCondicion("c.fechaElaboracion", "=", $dia)->
         agregarCondicion("c.Parroquia_id", "=", ceil($parroquia))->
-        ejecutarQuery(-1);
-
+        ejecutarQuery();
 echo json_encode($resultado);

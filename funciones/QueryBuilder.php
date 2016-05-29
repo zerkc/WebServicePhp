@@ -54,8 +54,8 @@ class QueryBuilder {
     public function ejecutarQuery($cantidad = 1, $inicio = -1) {
         $fn = new funcion();
         $valores = $fn->crearQuery($this->query, $this->parametros, $cantidad, $inicio);
-        if ($cantidad == 1 && count($valores) > 0) {
-            return $valores[0];
+        if ($cantidad == 1) {
+            return count($valores) > 0 ? $valores[0] : NULL;
         }
         return $valores;
     }

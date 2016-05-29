@@ -1,5 +1,7 @@
 <?php
 
+include_once ('/../Entidad.php');
+
 /**
  * Created by PhpStorm.
  * User: GustavoG
@@ -8,10 +10,6 @@
  */
 class Usuario {
 
-    /**
-     * @Id
-     */
-    public $id;
     public $usuario;
     public $contrasena;
     public $fechaNacimiento;
@@ -20,20 +18,6 @@ class Usuario {
      * @OneToOne(entity=Persona)
      */
     public $persona_id;
-
-    /**
-     * @return mixed
-     */
-    public function getId() {
-        return $this->id;
-    }
-
-    /**
-     * @param mixed $id
-     */
-    public function setId($id) {
-        $this->id = ceil($id);
-    }
 
     /**
      * @return mixed

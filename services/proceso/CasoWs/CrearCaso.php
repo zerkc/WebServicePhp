@@ -16,3 +16,10 @@
  * limitations under the License.
  */
 
+//include("../../../conexion/conect.php");
+//include ("../../../funciones/funcion.php");
+//include("../../../funciones/AnnotationManager.php");
+//include ('../../../funciones/QueryBuilder.php');
+//include ("../../../entidades/Proceso/Caso.php");
+
+$json=file_get_contents('php://input');
