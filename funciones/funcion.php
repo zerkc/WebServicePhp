@@ -175,7 +175,7 @@ class funcion {
         return $query . $f;
     }
 
-    public function crearQuery($query, $parametros, $cantidad, $inicio = -1) {
+    public function crearQuery($query, $parametros, $cantidad, $inicio = -1,$excluir = null) {
         $subQuery = $query;
         if (strpos($subQuery, ":") !== false) {
             while (strpos($subQuery, ":") !== false) {
@@ -195,10 +195,10 @@ class funcion {
         if ($inicio > 0) {
             $query.=" offset $inicio";
         }
-        return $this->ejecutarQuery($query);
+        return $this->ejecutarQuery($query,$excluir);
     }
 
-    public function ejecutarQuery($query) {
+    public function ejecutarQuery($query,$excluir = null) {
         $resultados = array();
         $entidad = $this->getEntiyQuery($query);
         $conexion = new conexion();
@@ -206,7 +206,7 @@ class funcion {
         $result = $con->query($query);
         if ($result !== false) {
             while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
-                $obj = $this->newObject($entidad, $row);
+                $obj = $this->newObject($entidad, $row,$excluir);
                 $resultados = array_merge($resultados, array($obj));
             }
         }
@@ -236,7 +236,7 @@ class funcion {
     /**
      *
      */
-    public function newObject($class, $parametros) {
+    public function newObject($class, $parametros,$excluir = null) {
         $reflexion = new ReflectionClass($class);
         $AM = new AnnotationManager();
         $instance = $reflexion->newInstanceWithoutConstructor();
@@ -249,14 +249,14 @@ class funcion {
                     $ManyToOne = $AM->getManyToOn($class, $field);
                     if (isset($ManyToOne["entity"])) {
                         $ref = new ReflectionClass($ManyToOne["entity"]);
-                        $ins = $ref->newInstanceWithoutConstructor();
+                       // $ins = $ref->newInstanceWithoutConstructor();
                         $r = $this->crearQuery("SELECT * FROM " . $ref->getName() . " WHERE id=:id", array("id" => ceil($parametros[$field])));
                         //insert result in $int
                         $this->setValor($instance, $field, $r);
                     }
                 } else if ($this->containsAnnotation($reflexion->getProperty($field), '@OneToOne')) {
                     $OneToOne = $AM->getOneToOne($class, $field);
-                    if (isset($OneToOne["entity"])) {
+                    if (isset($OneToOne["entity"]) && !isset($OneToOne['mappedBy'])) {
                         $ref = new ReflectionClass($OneToOne["entity"]);
                         $r = $this->crearQuery("SELECT * FROM " . $ref->getName() . " WHERE id=:id", array("id" => ceil($parametros[$field])));
                         $this->setValor($instance, $field, $r[0]);
@@ -272,7 +272,7 @@ class funcion {
 
                         $r = $this->crearQuery("SELECT e.* FROM " . $ref->getName() . " e "
                                 . "INNER JOIN $class c on c.id= e." . $OneToMany["mappedBy"] . " "
-                                . "WHERE c.id=:id", array("id" => ceil($parametros['id'])), -1);
+                                . "WHERE c.id=:id AND e.id <> :idexclude", array("id" => ceil($parametros['id']),"idexclude" => $excluir), -1);
                         $this->setValor($instance, $field, $r);
                     }
                 }
