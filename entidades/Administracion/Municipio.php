@@ -1,5 +1,6 @@
 <?php
 
+include_once ('/../Entidad.php');
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,42 +12,29 @@
  *
  * @author GustavoG
  */
-class Municipio {
+class Municipio extends Entidad {
 
-    /**
-     * @Id
-     */
-    public $id;
     public $nombre;
 
     /**
      * @OneToMany(entity=Parroquia,mappedBy=municipio_id)
      */
     public $parroquia;
-    
-    function getId() {
-        return $this->id;
-    }
 
-    function getNombre() {
+    public function getNombre() {
         return $this->nombre;
     }
 
-    function getParroquia() {
+    public function getParroquia() {
         return $this->parroquia;
     }
 
-    function setId($id) {
-        $this->id = ceil($id);
-    }
-
-    function setNombre($nombre) {
+    public function setNombre($nombre) {
         $this->nombre = $nombre;
     }
 
-    function setParroquia($parroquia) {
+    public function setParroquia($parroquia) {
         $this->parroquia = $parroquia;
     }
-
 
 }

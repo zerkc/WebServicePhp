@@ -1,5 +1,6 @@
 <?php
 
+include_once ('/../Entidad.php');
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,12 +12,8 @@
  *
  * @author GustavoG
  */
-class Animal {
+class Animal extends Entidad {
 
-    /**
-     * @Id
-     */
-    public $id;
     public $nombre;
 
     /**
@@ -25,53 +22,45 @@ class Animal {
     public $especie_id;
 
     /**
-     * @OneToMany(entity=Animal_has_Caso)
+     * @OneToMany(entity=RegistroVacunacion_has_Animal,mappedBy=animal_id)
      */
-//    public $animal_caso;
+    public $vacunacion_has_Animal;
 
     /**
-     * @OneToMany(entity=Vacunacion_has_Animal)
+     * @OneToMany(entity=Animal_has_Caso,mappedBy=animal_id)
      */
-//    public $vacunacion_animal;
-
-    public function getId() {
-        return $this->id;
-    }
+    public $animal_has_Caso;
 
     public function getNombre() {
         return $this->nombre;
     }
 
-    public function setId($id) {
-        $this->id = ceil($id);
+    public function getEspecie_id() {
+        return $this->especie_id;
+    }
+
+    public function getVacunacion_has_Animal() {
+        return $this->vacunacion_has_Animal;
+    }
+
+    public function getAnimal_has_Caso() {
+        return $this->animal_has_Caso;
     }
 
     public function setNombre($nombre) {
         $this->nombre = $nombre;
     }
 
-    function getEspecie_id() {
-        return $this->especie_id;
-    }
-
-    function setEspecie_id($especie_id) {
+    public function setEspecie_id($especie_id) {
         $this->especie_id = $especie_id;
     }
 
-//    function getAnimal_caso() {
-//        return $this->animal_caso;
-//    }
-//
-//    function getVacunacion_animal() {
-//        return $this->vacunacion_animal;
-//    }
-//
-//    function setAnimal_caso($animal_caso) {
-//        $this->animal_caso = $animal_caso;
-//    }
-//
-//    function setVacunacion_animal($vacunacion_animal) {
-//        $this->vacunacion_animal = $vacunacion_animal;
-//    }
+    public function setVacunacion_has_Animal($vacunacion_has_Animal) {
+        $this->vacunacion_has_Animal = $vacunacion_has_Animal;
+    }
+
+    public function setAnimal_has_Caso($animal_has_Caso) {
+        $this->animal_has_Caso = $animal_has_Caso;
+    }
 
 }

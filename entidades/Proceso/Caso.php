@@ -1,54 +1,76 @@
 <?php
 
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright 2016 angel.colina.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
+include_once ('/../Entidad.php');
 
 /**
  * Description of Caso
  *
  * @author GustavoG
  */
-class Caso {
+class Caso extends Entidad {
 
-    /**
-     * @Id
-     */
-    private $id;
-    private $fechaElaboracion;
+    public $fechaElaboracion;
+
     /**
      * @ManyToOne(entity=Parroquia)
      */
-    private $Parroquia_id;
-    /**
-     * @OneToMany(entity=Animal_has_Caso)
-     */
-    private $animal_caso;
+    public $parroquia_id;
 
-    public function getId() {
-        return $this->id;
-    }
+    /**
+     * @ManyToOne(entity=Semana)
+     */
+    public $semana_id;
+
+    /**
+     * @OneToMany(entity=Animal_has_Caso,mappedBy=caso_id)
+     */
+    public $animal_has_Caso;
 
     public function getFechaElaboracion() {
         return $this->fechaElaboracion;
     }
 
     public function getParroquia_id() {
-        return $this->Parroquia_id;
+        return $this->parroquia_id;
     }
 
-    public function setId($id) {
-        $this->id = $id;
+    public function getSemana_id() {
+        return $this->semana_id;
+    }
+
+    public function getAnimal_has_Caso() {
+        return $this->animal_has_Caso;
     }
 
     public function setFechaElaboracion($fechaElaboracion) {
         $this->fechaElaboracion = $fechaElaboracion;
     }
 
-    public function setParroquia_id($Parroquia_id) {
-        $this->Parroquia_id = $Parroquia_id;
+    public function setParroquia_id($parroquia_id) {
+        $this->parroquia_id = $parroquia_id;
+    }
+
+    public function setSemana_id($semana_id) {
+        $this->semana_id = $semana_id;
+    }
+
+    public function setAnimal_has_Caso($animal_has_Caso) {
+        $this->animal_has_Caso = $animal_has_Caso;
     }
 
 }

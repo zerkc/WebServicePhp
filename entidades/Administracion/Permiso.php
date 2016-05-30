@@ -15,28 +15,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+include_once ('/../Entidad.php');
 
 /**
- * Description of Entidad
+ * Description of Permiso
  *
  * @author angel.colina
  */
-abstract class Entidad {
+class Permiso extends Entidad {
+
+    public $nombre;
 
     /**
-     * @Id
+     * @OneToMany(entity=Usuario,mappedBy=permiso_ic)
      */
-    public $id;
+    public $usuarios;
 
-    public function getId() {
-        return $this->id;
+    public function getNombre() {
+        return $this->nombre;
     }
 
-    public function setId($id) {
-        if (!is_null($id)) {
-            $id = ceil($id);
-        }
-        $this->id = $id;
+    public function getUsuarios() {
+        return $this->usuarios;
+    }
+
+    public function setNombre($nombre) {
+        $this->nombre = $nombre;
+    }
+
+    public function setUsuarios($usuarios) {
+        $this->usuarios = $usuarios;
     }
 
 }

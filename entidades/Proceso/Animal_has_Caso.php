@@ -17,21 +17,22 @@ class Animal_has_Caso {
      * @Id
      * @ManyToOne(entity=Animal)
      */
-    private $Animal_id;
+    public $animal_id;
+
     /**
      * @Id
      * @ManyToOne(entity=Caso)
      */
-    private $Caso_id;
-    private $cantidadIngresado;
-    private $cantidadPositivos;
+    public $caso_id;
+    public $cantidadIngresado;
+    public $cantidadPositivos;
 
     public function getAnimal_id() {
-        return $this->Animal_id;
+        return $this->animal_id;
     }
 
     public function getCaso_id() {
-        return $this->Caso_id;
+        return $this->caso_id;
     }
 
     public function getCantidadIngresado() {
@@ -42,12 +43,12 @@ class Animal_has_Caso {
         return $this->cantidadPositivos;
     }
 
-    public function setAnimal_id($Animal_id) {
-        $this->Animal_id = $Animal_id;
+    public function setAnimal_id($animal_id) {
+        $this->animal_id = $animal_id;
     }
 
-    public function setCaso_id($Caso_id) {
-        $this->Caso_id = $Caso_id;
+    public function setCaso_id($caso_id) {
+        $this->caso_id = $caso_id;
     }
 
     public function setCantidadIngresado($cantidadIngresado) {

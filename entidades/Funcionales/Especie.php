@@ -1,5 +1,6 @@
 <?php
 
+include_once ('/../Entidad.php');
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,40 +12,28 @@
  *
  * @author GustavoG
  */
-class Especie {
+class Especie extends Entidad {
 
-    /**
-     * @Id
-     */
-    private $id;
-    private $nombre;
+    public $nombre;
 
     /**
      * @OneToMany(entity=Animal,mappedBy=especie_id)
      */
-    private $animales;
-
-    public function getId() {
-        return $this->id;
-    }
+    public $animales;
 
     public function getNombre() {
         return $this->nombre;
     }
 
-    public function setId($id) {
-        $this->id = ceil($id);
+    public function getAnimales() {
+        return $this->animales;
     }
 
     public function setNombre($nombre) {
         $this->nombre = $nombre;
     }
 
-    function getAnimales() {
-        return $this->animales;
-    }
-
-    function setAnimales($animales) {
+    public function setAnimales($animales) {
         $this->animales = $animales;
     }
 

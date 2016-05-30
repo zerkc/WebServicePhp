@@ -1,5 +1,6 @@
 <?php
 
+include_once ('/../Entidad.php');
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,27 +12,21 @@
  *
  * @author GustavoG
  */
-class Novedades {
+class Novedades extends Entidad {
 
-    /**
-     * @Id
-     */
-    private $id;
-    private $fechaElaboracion;
-    private $nombre;
-    private $descripcion;
+    public $fechaElaboracion;
+    public $nombre;
+    public $descripcion;
+
     /**
      * @ManyToOne(entity=Cliente)
      */
-    private $Cliente_id;
+    public $cliente_id;
+
     /**
      * @ManyToOne(entity=Usuario)
      */
-    private $Usuario_id;
-
-    public function getId() {
-        return $this->id;
-    }
+    public $usuario_id;
 
     public function getFechaElaboracion() {
         return $this->fechaElaboracion;
@@ -46,15 +41,11 @@ class Novedades {
     }
 
     public function getCliente_id() {
-        return $this->Cliente_id;
+        return $this->cliente_id;
     }
 
     public function getUsuario_id() {
-        return $this->Usuario_id;
-    }
-
-    public function setId($id) {
-        $this->id = $id;
+        return $this->usuario_id;
     }
 
     public function setFechaElaboracion($fechaElaboracion) {
@@ -69,12 +60,12 @@ class Novedades {
         $this->descripcion = $descripcion;
     }
 
-    public function setCliente_id($Cliente_id) {
-        $this->Cliente_id = $Cliente_id;
+    public function setCliente_id($cliente_id) {
+        $this->cliente_id = $cliente_id;
     }
 
-    public function setUsuario_id($Usuario_id) {
-        $this->Usuario_id = $Usuario_id;
+    public function setUsuario_id($usuario_id) {
+        $this->usuario_id = $usuario_id;
     }
 
 }

@@ -1,5 +1,6 @@
 <?php
 
+include_once ('/../Entidad.php');
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,22 +12,20 @@
  *
  * @author GustavoG
  */
-class Semana {
+class Semana extends Entidad {
+
+    public $semana;
+    public $year;
 
     /**
-     * @Id
+     * @OneToMany(entity=Novedades,mappedBy=semana_id)
      */
-    private $id;
-    private $semana;
-    private $year;
-    /**
-     * @OneToMany(entity=Semana_has_Parroquia)
-     */
-    private $semana_parroquia;
+    public $vacunaciones;
 
-    public function getId() {
-        return $this->id;
-    }
+    /**
+     * @OneToMany(entity=Caso,mappedBy=semana_id)
+     */
+    public $casos;
 
     public function getSemana() {
         return $this->semana;
@@ -36,8 +35,12 @@ class Semana {
         return $this->year;
     }
 
-    public function setId($id) {
-        $this->id = $id;
+    public function getVacunaciones() {
+        return $this->vacunaciones;
+    }
+
+    public function getCasos() {
+        return $this->casos;
     }
 
     public function setSemana($semana) {
@@ -46,6 +49,14 @@ class Semana {
 
     public function setYear($year) {
         $this->year = $year;
+    }
+
+    public function setVacunaciones($vacunaciones) {
+        $this->vacunaciones = $vacunaciones;
+    }
+
+    public function setCasos($casos) {
+        $this->casos = $casos;
     }
 
 }
